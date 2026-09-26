@@ -25,7 +25,8 @@ components/
   Header.jsx           Nav, account icon, cart icon, mobile menu
   Hero.jsx
   ProductCard.jsx      Single product card (size select, add to cart, view details)
-  ProductGrid.jsx      "Pick your route" section
+  ProductGrid.jsx      "Pick your route" section — the three core builds
+  CityEditions.jsx     "The India Line" — six city-themed special editions
   CraftSection.jsx
   FeaturesSection.jsx
   Testimonials.jsx
@@ -43,7 +44,7 @@ context/
                         you want to understand how data flows.
 
 lib/
-  products.js           Product catalog (name, price, description, features…)
+  products.js           Product catalog — core products plus CITY_EDITIONS
   coupons.js             Coupon codes and their rules
   format.js              ₹ currency formatting
   storage.js              localStorage read/write helpers (SSR-safe)
@@ -71,16 +72,3 @@ place (`addToCart`, `placeOrder`, `setProfile`, etc.).
 - `WELCOME10` — 10% off the whole order
 - `MONSOON10` — 10% off The Monsoon Slip only
 - `FLAT200` — ₹200 off orders over ₹2,000
-
-## Notes on the conversion
-
-- The original single HTML file used vanilla JS + direct DOM manipulation. Everything now flows
-  through React state in `StoreContext.jsx` instead — no more manual `innerHTML` or
-  `classList.toggle`.
-- All CSS class names were kept identical to the original build, so `app/globals.css` is close to
-  a direct copy of the original `<style>` block. If you're comparing against the original design,
-  the visual language should match exactly.
-- This project was written by hand in a sandboxed environment without network access, so it was
-  **not** run through `npm install` / `npm run build` before being handed to you. Please run
-  `npm install && npm run dev` as your first step and let me know if anything doesn't compile —
-  happy to fix it live.

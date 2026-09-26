@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -22,9 +23,9 @@ export default function Footer() {
       <div className="wrap">
         <div className="foot-top">
           <div className="foot-brand">
-            <div className="logo">
+            <Link href="/" className="logo">
               GENJIS<span>.</span>
-            </div>
+            </Link>
             <p>
               Canvas sneakers designed in India, for India — built to survive the commute, not just the catalog
               shoot.
@@ -45,18 +46,20 @@ export default function Footer() {
 
           <div className="foot-col">
             <h4>Shop</h4>
-            <a href="#shop">The Mumbai Low</a>
-            <a href="#shop">The Local High</a>
-            <a href="#shop">The Monsoon Slip</a>
-            <a href="#city-editions">City Editions</a>
+            <Link href="/shop">The Mumbai Low</Link>
+            <Link href="/shop">The Local High</Link>
+            <Link href="/shop">The Monsoon Slip</Link>
+            <Link href="/city-editions">City Editions</Link>
           </div>
 
           <div className="foot-col">
-            <h4>Find us</h4>
-            <a href="#stores">Mumbai &middot; Bandra</a>
-            <a href="#stores">Bengaluru &middot; Indiranagar</a>
-            <a href="#stores">Delhi &middot; Hauz Khas</a>
-            <a href="#stores">Kolkata &middot; Park Street</a>
+            <h4>City Editions</h4>
+            <Link href="/city-editions">Jaipur &middot; Johari Bazaar</Link>
+            <Link href="/city-editions">Kolkata &middot; Park Street</Link>
+            <Link href="/city-editions">Varanasi &middot; Dashashwamedh Ghat</Link>
+            <Link href="/city-editions">Chennai &middot; Mylapore</Link>
+            <Link href="/city-editions">Hyderabad &middot; Charminar</Link>
+            <Link href="/city-editions">Kerala &middot; Fort Kochi</Link>
           </div>
         </div>
 

@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useStore } from '@/context/StoreContext';
 import { fmt } from '@/lib/format';
+import { flyShoeToCart } from '@/lib/flyToCart';
 import ShoeIllustration from './ShoeIllustration';
 
 const SIZES = [6, 7, 8, 9, 10, 11];
@@ -10,6 +11,7 @@ const SIZES = [6, 7, 8, 9, 10, 11];
 export default function ProductCard({ id }) {
   const { PRODUCTS, addToCart, setProductModalId } = useStore();
   const p = PRODUCTS[id];
+  const shoeRef = useRef(null);
 
   const [size, setSize] = useState('');
   const [error, setError] = useState('');
@@ -26,6 +28,7 @@ export default function ProductCard({ id }) {
     }
     setError('');
     addToCart(id, size);
+    flyShoeToCart(shoeRef.current);
     setAdded(true);
     setTimeout(() => setAdded(false), 1100);
   }
@@ -44,6 +47,7 @@ export default function ProductCard({ id }) {
             openDetails();
           }
         }}
+        ref={shoeRef}
       >
         <ShoeIllustration color={p.color} accent={p.accent} />
       </div>

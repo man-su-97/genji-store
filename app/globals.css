@@ -156,6 +156,29 @@
   }
   .cart-badge.hidden{ display:none; }
 
+  .cart-btn.cart-pulse{ animation: cartPulse .45s ease; border-color: var(--mustard); }
+  @keyframes cartPulse{
+    0%{ transform: scale(1); }
+    40%{ transform: scale(1.22); }
+    100%{ transform: scale(1); }
+  }
+
+  /* fly-to-cart animation: a cloned shoe SVG animates from the clicked product to the
+     header cart icon on "Add to cart". Purely decorative — see lib/flyToCart.js. */
+  .fly-shoe{
+    position: fixed;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+    transition: transform .7s cubic-bezier(.3,.6,.3,1), opacity .7s ease;
+    will-change: transform, opacity;
+  }
+  .fly-shoe svg{ width: 100%; height: 100%; display: block; }
+  @media (prefers-reduced-motion: reduce){
+    .cart-btn.cart-pulse{ animation: none; }
+  }
+
   /* ---------- hero ---------- */
   .hero{ position:relative; padding: clamp(48px,7vw,88px) 0 clamp(32px,5vw,56px); border-bottom: 1px solid var(--line); }
   .hero-grid{ display:grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px,4vw,40px); align-items:center; }
@@ -196,7 +219,14 @@
   }
   .product-card:hover{ border-color: var(--mustard); transform: translateY(-4px); }
   .product-card .shoe-holder{ height:170px; display:flex; align-items:center; justify-content:center; background: var(--surface); border-radius:4px; overflow:hidden; }
-  .product-card .shoe-holder svg{ width:88%; height:auto; max-height:100%; }
+  .product-card .shoe-holder svg{
+    width:88%; height:auto; max-height:100%;
+    transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .product-card:hover .shoe-holder svg{ transform: scale(1.05) rotate(-2deg); }
+  @media (prefers-reduced-motion: reduce){
+    .product-card .shoe-holder svg{ transition: none; }
+  }
   .product-card h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; text-transform:none; }
   .link-plain{ background:none; border:none; padding:0; font:inherit; color:inherit; cursor:pointer; text-align:left; }
   .link-plain:hover{ text-decoration:underline; }
@@ -216,74 +246,169 @@
   .add-row{ display:flex; flex-direction:column; gap:6px; }
   .add-err{ font-size:12.5px; color: var(--danger); min-height:14px; }
 
+  /* ---------- homepage city collage banner (links through to /city-editions) ---------- */
+  .city-collage{ padding-bottom: clamp(24px,3vw,36px); }
+  .collage-link{ display: block; text-decoration: none; color: inherit; }
+  .collage-strip{
+    display: flex; gap: 4px;
+    height: clamp(280px,34vw,400px);
+    border-radius: 10px; overflow: hidden; border: 1px solid var(--line);
+    transition: border-color .2s ease;
+  }
+  .collage-link:hover .collage-strip{ border-color: var(--mustard); }
+  .collage-slice{ position: relative; flex: 1; min-width: 0; overflow: hidden; }
+  .collage-photo{ object-fit: cover; transition: transform .6s ease; }
+  .collage-slice:hover .collage-photo{ transform: scale(1.06); }
+  .collage-slice-scrim{
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(20,15,10,0) 55%, rgba(20,15,10,.85) 100%);
+  }
+  .collage-city-name{
+    position: absolute; left: 10px; right: 10px; bottom: 12px;
+    font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+    font-size: clamp(0.8rem,1.3vw,1.15rem); color: #EDE6D3; line-height: 1;
+  }
+  .collage-caption{
+    text-align: center; margin: 18px 0 0;
+    font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+    letter-spacing: .04em; font-size: clamp(1rem,1.6vw,1.3rem); color: var(--text-soft);
+  }
+  .collage-link:hover .collage-caption{ color: var(--mustard-deep); }
+
+  @media (max-width: 640px){
+    .collage-strip{ flex-direction: column; height: auto; gap: 4px; }
+    .collage-slice{ flex: none; height: 130px; }
+  }
+
+  /* ---------- homepage shop banner: uncropped photo on top, caption below (image carries its own text, so ours never overlaps it) ---------- */
+  .collections-teaser{ padding-bottom: clamp(44px,6vw,72px); }
+  .shop-banner{
+    display: flex; flex-direction: column;
+    border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
+    text-decoration: none; color: var(--text);
+    transition: border-color .2s ease;
+  }
+  .shop-banner:hover{ border-color: var(--mustard); }
+  .shop-banner-media{ position: relative; min-height: clamp(240px,30vw,340px); background: var(--indigo-deep); }
+  .shop-banner-photo{ object-fit: cover; }
+  .shop-banner-caption{ padding: clamp(22px,3vw,32px) clamp(24px,3vw,36px); background: var(--surface-alt); }
+  .shop-banner-caption .teaser-eyebrow{ font-size: 12.5px; letter-spacing: .03em; color: var(--text-soft); margin-bottom: 8px; display: block; }
+  .shop-banner-caption h3{
+    font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+    font-size: clamp(1.8rem,3vw,2.6rem); line-height: 0.98; margin: 0 0 10px; color: var(--text);
+  }
+  .shop-banner-caption p{ font-size: 14px; color: var(--text-soft); max-width: 46ch; margin: 0 0 14px; line-height: 1.5; }
+  .shop-banner-caption .teaser-cta{ font-weight: 600; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; color: var(--mustard-deep); }
+
+  @media (min-width: 761px){
+    .shop-banner{ flex-direction: row; }
+    .shop-banner-media{ flex: 1.3; min-height: clamp(280px,32vw,380px); }
+    .shop-banner-caption{ flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  }
+
+  /* ---------- shop page: filter + sort ---------- */
+  .shop-toolbar{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:16px; }
+  .shop-filters{ display:flex; gap:10px; flex-wrap:wrap; }
+  .shop-filter-pill{
+    font-family:'Space Grotesk',sans-serif; font-size:13.5px; font-weight:600;
+    padding:8px 16px; border-radius:20px; border:1px solid var(--line);
+    background:transparent; color:var(--text-soft); cursor:pointer;
+    transition:border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  .shop-filter-pill:hover{ border-color:var(--mustard); color:var(--text); }
+  .shop-filter-pill.active{ background:var(--ink); border-color:var(--ink); color:var(--canvas); }
+
+  .shop-sort{ display:flex; align-items:center; gap:10px; }
+  .shop-sort label{ font-size:13px; color:var(--text-soft); }
+  .shop-sort select{
+    padding:8px 12px; border-radius:4px; border:1px solid var(--line); background:var(--surface-alt);
+    color:var(--text); font-family:'Space Grotesk',sans-serif; font-size:13.5px;
+  }
+
+  .shop-count{ font-size:13px; color:var(--text-soft); margin:0 0 18px; }
+  .shop-empty{ color:var(--text-soft); font-size:15px; padding:40px 0; text-align:center; }
+
   /* ---------- city editions: the india line ---------- */
   .city-line{ padding-bottom: clamp(44px,6vw,72px); }
   .city-line .section-head{ margin-bottom: clamp(20px,3vw,32px); }
 
-  .line-track{
-    position: relative;
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    overflow-y: visible;
-    scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 34px var(--gutter) 12px;
-  }
-  .line-track::-webkit-scrollbar{ display: none; }
-  .line-track::before{
-    content: "";
-    position: absolute;
-    left: 0; top: 19px;
-    height: 2px; width: 0;
-    background-image: repeating-linear-gradient(90deg, var(--text-soft) 0 9px, transparent 9px 16px);
-    opacity: .5;
-    transition: width 1s cubic-bezier(.2,.7,.2,1);
-  }
-  .line-track.in-view::before{ width: 100%; }
-  @media (prefers-reduced-motion: reduce){
-    .line-track::before{ transition: none; width: 100%; }
-  }
+  .city-showcase{ display: flex; flex-direction: column; gap: clamp(24px,3.5vw,40px); }
 
-  .station-card{
-    position: relative;
-    flex: 0 0 272px;
-    scroll-snap-align: start;
-    border: 1px solid var(--line); border-radius: 6px;
+  .showcase-row{
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    border: 1px solid var(--line); border-radius: 10px;
     background: var(--surface-alt);
-    padding: 30px 22px 22px;
-    display: flex; flex-direction: column; gap: 12px;
+    overflow: hidden;
   }
-  .station-card:hover{ border-color: var(--mustard); }
+  .showcase-row.reversed{ grid-template-columns: 1fr 1.3fr; }
+  .showcase-row.reversed .showcase-media{ order: 2; }
+  .showcase-row.reversed .showcase-body{ order: 1; }
 
-  .station-stop{ position: absolute; top: -25px; left: 22px; display: flex; align-items: center; gap: 7px; }
-  .station-stop .dot{ width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 3px var(--surface); flex-shrink: 0; }
-  .station-stop .code{ font-weight: 700; font-size: 12.5px; letter-spacing: .03em; color: var(--text); }
-  .station-stop .city-name{ font-size: 12.5px; color: var(--text-soft); }
-
-  .station-card .shoe-holder{ height: 150px; }
-  .station-card h3{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; text-transform:none; }
-  .station-card .desc{ font-size: 13.5px; color: var(--text-soft); line-height: 1.55; min-height: 40px; }
-  .station-limited{ font-size: 12.5px; color: var(--text-soft); margin: -6px 0 0; }
-
-  @media (max-width: 640px){
-    .line-track{
-      flex-direction: column;
-      overflow-x: visible;
-      padding: 12px 20px 4px 40px;
-    }
-    .line-track::before{
-      left: 5px; top: 0; width: 2px; height: 0;
-      transition: height 1s cubic-bezier(.2,.7,.2,1);
-      background-image: repeating-linear-gradient(180deg, var(--text-soft) 0 9px, transparent 9px 16px);
-    }
-    .line-track.in-view::before{ height: 100%; }
-    .station-card{ flex-basis: auto; }
-    .station-stop{ top: -22px; left: -18px; }
+  .showcase-media{
+    position: relative;
+    min-height: clamp(240px, 30vw, 360px);
+    cursor: pointer;
   }
-  @media (max-width: 640px) and (prefers-reduced-motion: reduce){
-    .line-track::before{ transition: none; height: 100%; }
+  .showcase-media .city-skyline{ position: absolute; inset: 0; display: block; }
+  .showcase-media .showcase-photo{ object-fit: cover; }
+  .showcase-media:focus-visible{ outline: 2px solid var(--mustard); outline-offset: -3px; }
+
+  .showcase-body{
+    display: flex; flex-direction: column;
+    padding: clamp(24px,3vw,40px) clamp(24px,3vw,40px) clamp(24px,2.4vw,32px);
+  }
+
+  .showcase-shoe{
+    width: clamp(150px, 20vw, 220px);
+    margin: 0 0 14px -14%;
+    align-self: flex-start;
+    filter: drop-shadow(0 12px 16px rgba(0,0,0,.3));
+  }
+  .showcase-row.reversed .showcase-shoe{ align-self: flex-end; margin: 0 -14% 14px 0; }
+  .showcase-shoe svg{ width: 100%; height: auto; display: block; }
+  .showcase-shoe button{ display: block; width: 100%; background: none; border: none; padding: 0; cursor: pointer; }
+
+  /* one-time settle-in when the row scrolls into view; resting position above is
+     unaffected either way, so this is purely an enhancement, never a gate */
+  @keyframes shoeSettle{
+    0%{ transform: translateY(-28px) scale(.9); opacity: .5; }
+    60%{ transform: translateY(5px) scale(1.03); opacity: 1; }
+    100%{ transform: translateY(0) scale(1); opacity: 1; }
+  }
+  .showcase-shoe.settle-in{ animation: shoeSettle .8s cubic-bezier(.22,.68,.28,1.2) both; }
+  @media (prefers-reduced-motion: reduce){
+    .showcase-shoe.settle-in{ animation: none; }
+  }
+
+  .showcase-eyebrow{ display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .showcase-eyebrow .dot{ width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .showcase-eyebrow .code{ font-weight: 700; font-size: 12.5px; letter-spacing: .03em; color: var(--text); }
+  .showcase-eyebrow .city-name{ font-size: 12.5px; color: var(--text-soft); }
+
+  .showcase-body h3{
+    font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+    font-size: clamp(1.7rem, 2.6vw, 2.5rem); line-height: 0.98; margin: 0 0 14px;
+  }
+
+  .showcase-body .desc{ font-size: 14.5px; color: var(--text-soft); line-height: 1.65; margin: 0 0 20px; max-width: 46ch; }
+
+  .showcase-body .product-meta{ margin-bottom: 8px; }
+  .showcase-body .station-limited{ font-size: 12.5px; color: var(--text-soft); margin: 0 0 18px; }
+
+  .showcase-body .size-row{ border-top: none; padding-top: 0; margin-bottom: 12px; max-width: 280px; }
+  .showcase-body .add-row{ max-width: 280px; }
+
+  @media (max-width: 900px){
+    .showcase-row, .showcase-row.reversed{ grid-template-columns: 1fr; }
+    .showcase-media, .showcase-body,
+    .showcase-row.reversed .showcase-media, .showcase-row.reversed .showcase-body{ order: initial; }
+    .showcase-media{ aspect-ratio: 3 / 2; min-height: 200px; }
+    .showcase-shoe, .showcase-row.reversed .showcase-shoe{
+      width: clamp(160px, 46vw, 220px);
+      align-self: center;
+      margin: -46px 0 16px;
+    }
   }
 
   /* ---------- craft / process ---------- */

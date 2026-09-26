@@ -1,5 +1,13 @@
 import './globals.css';
 import { StoreProvider } from '@/context/StoreContext';
+import PromoBar from '@/components/PromoBar';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import Backdrop from '@/components/Backdrop';
+import CartDrawer from '@/components/CartDrawer';
+import ProductModal from '@/components/ProductModal';
+import CheckoutModal from '@/components/CheckoutModal';
+import AccountModal from '@/components/AccountModal';
 
 export const metadata = {
   title: 'Genjis — Canvas Sneakers',
@@ -23,7 +31,18 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <StoreProvider>{children}</StoreProvider>
+        <StoreProvider>
+          <PromoBar />
+          <Header />
+          {children}
+          <Footer />
+
+          <Backdrop />
+          <CartDrawer />
+          <ProductModal />
+          <CheckoutModal />
+          <AccountModal />
+        </StoreProvider>
       </body>
     </html>
   );

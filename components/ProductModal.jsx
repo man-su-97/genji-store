@@ -1,14 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useStore } from '@/context/StoreContext';
 import { fmt } from '@/lib/format';
+import { flyShoeToCart } from '@/lib/flyToCart';
 import ShoeIllustration from './ShoeIllustration';
 
 const SIZES = [6, 7, 8, 9, 10, 11];
 
 export default function ProductModal() {
   const { PRODUCTS, COUPONS, productModalId, setProductModalId, addToCart } = useStore();
+  const shoeRef = useRef(null);
 
   const [size, setSize] = useState('');
   const [error, setError] = useState('');
@@ -29,6 +31,7 @@ export default function ProductModal() {
     }
     setError('');
     addToCart(productModalId, size);
+    flyShoeToCart(shoeRef.current);
     setAdded(true);
     setTimeout(() => setAdded(false), 1100);
   }
@@ -51,7 +54,7 @@ export default function ProductModal() {
             </button>
           </div>
 
-          <div className="pd-shoe">
+          <div className="pd-shoe" ref={shoeRef}>
             <ShoeIllustration color={p.color} accent={p.accent} />
           </div>
 

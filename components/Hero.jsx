@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import ShoeIllustration from './ShoeIllustration';
 
 export default function Hero() {
@@ -16,7 +17,7 @@ export default function Hero() {
             heat, sudden rain. Light on your feet, tough on the commute.
           </p>
           <div className="hero-ctas">
-            <a className="btn" href="#shop">Shop the collection</a>
+            <Link className="btn" href="/shop">Shop the collection</Link>
             <a className="btn outline" href="#craft">See how they're made</a>
           </div>
           <div className="stat-row">
