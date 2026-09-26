@@ -21,6 +21,7 @@ export default function Header() {
         <nav className="primary">
           <div className="navlinks">
             <a className="navlink" href="#shop">Shop</a>
+            <a className="navlink" href="#city-editions">City Editions</a>
             <a className="navlink" href="#craft">Craft</a>
             <a className="navlink" href="#stores">Stores</a>
           </div>
@@ -60,6 +61,7 @@ export default function Header() {
 
       <div className={`mobile-panel${menuOpen ? ' open' : ''}`}>
         <a href="#shop" onClick={closeMenu}>Shop</a>
+        <a href="#city-editions" onClick={closeMenu}>City Editions</a>
         <a href="#craft" onClick={closeMenu}>Craft</a>
         <a href="#stores" onClick={closeMenu}>Stores</a>
         <a className="btn" href="#shop" style={{ width: 'fit-content' }} onClick={closeMenu}>

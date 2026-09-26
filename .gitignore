@@ -25,3 +25,11 @@ yarn-error.log*
 
 # WSL / Windows zone identifier files
 *:Zone.Identifier
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

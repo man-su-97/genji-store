@@ -2,6 +2,7 @@ import PromoBar from '@/components/PromoBar';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import ProductGrid from '@/components/ProductGrid';
+import CityEditions from '@/components/CityEditions';
 import CraftSection from '@/components/CraftSection';
 import FeaturesSection from '@/components/FeaturesSection';
 import Testimonials from '@/components/Testimonials';
@@ -20,6 +21,7 @@ export default function Home() {
       <main>
         <Hero />
         <ProductGrid />
+        <CityEditions />
         <CraftSection />
         <FeaturesSection />
         <Testimonials />

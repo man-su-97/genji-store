@@ -2,6 +2,7 @@ const ITEMS = [
   <>🔥 <strong>WELCOME10</strong> — 10% off your first order</>,
   <>🌧️ <strong>MONSOON10</strong> — 10% off The Monsoon Slip</>,
   <>📦 Free shipping, every order, every city</>,
+  <>🗺️ The India Line — six city editions, live now</>,
   <>💸 <strong>FLAT200</strong> — ₹200 off on orders above ₹2,000</>,
 ];
 

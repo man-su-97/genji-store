@@ -1,7 +1,7 @@
 export default function FeaturesSection() {
   return (
-    <section className="section" style={{ paddingBottom: 0, borderBottom: 'none' }}>
-      <div className="wrap" style={{ paddingBottom: 0 }}>
+    <section className="section">
+      <div className="wrap">
         <div className="section-head" style={{ marginBottom: 0 }}>
           <h2 style={{ maxWidth: '16ch' }}>Why people switch to Genjis</h2>
         </div>

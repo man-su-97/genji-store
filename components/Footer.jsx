@@ -48,6 +48,7 @@ export default function Footer() {
             <a href="#shop">The Mumbai Low</a>
             <a href="#shop">The Local High</a>
             <a href="#shop">The Monsoon Slip</a>
+            <a href="#city-editions">City Editions</a>
           </div>
 
           <div className="foot-col">
