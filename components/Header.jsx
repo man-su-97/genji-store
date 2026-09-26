@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useStore } from '@/context/StoreContext';
 
 export default function Header() {
@@ -15,17 +16,16 @@ export default function Header() {
   return (
     <header>
       <div className="wrap">
-        <div className="logo">
+        <Link href="/" className="logo">
           GENJIS<span>.</span>
-        </div>
+        </Link>
         <nav className="primary">
           <div className="navlinks">
-            <a className="navlink" href="#shop">Shop</a>
-            <a className="navlink" href="#city-editions">City Editions</a>
-            <a className="navlink" href="#craft">Craft</a>
-            <a className="navlink" href="#stores">Stores</a>
+            <Link className="navlink" href="/shop">Shop</Link>
+            <Link className="navlink" href="/city-editions">City Editions</Link>
+            <Link className="navlink" href="/#craft">Craft</Link>
           </div>
-          <a className="btn outline" href="#shop">Shop now</a>
+          <Link className="btn outline" href="/shop">Shop now</Link>
 
           <button className="cart-btn" onClick={() => setAccountOpen(true)} aria-label="Your account">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
@@ -34,7 +34,7 @@ export default function Header() {
             </svg>
           </button>
 
-          <button className="cart-btn" onClick={() => setCartOpen(true)} aria-label="Open cart">
+          <button id="header-cart-button" className="cart-btn" onClick={() => setCartOpen(true)} aria-label="Open cart">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
               <path d="M6 6h15l-1.5 9h-12z" />
               <path d="M6 6L4.5 3H2" />
@@ -60,13 +60,12 @@ export default function Header() {
       </div>
 
       <div className={`mobile-panel${menuOpen ? ' open' : ''}`}>
-        <a href="#shop" onClick={closeMenu}>Shop</a>
-        <a href="#city-editions" onClick={closeMenu}>City Editions</a>
-        <a href="#craft" onClick={closeMenu}>Craft</a>
-        <a href="#stores" onClick={closeMenu}>Stores</a>
-        <a className="btn" href="#shop" style={{ width: 'fit-content' }} onClick={closeMenu}>
+        <Link href="/shop" onClick={closeMenu}>Shop</Link>
+        <Link href="/city-editions" onClick={closeMenu}>City Editions</Link>
+        <Link href="/#craft" onClick={closeMenu}>Craft</Link>
+        <Link className="btn" href="/shop" style={{ width: 'fit-content' }} onClick={closeMenu}>
           Shop now
-        </a>
+        </Link>
       </div>
     </header>
   );
